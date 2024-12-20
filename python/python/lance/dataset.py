@@ -380,7 +380,7 @@ class LanceDataset(pa.dataset.Dataset):
             e.g. "hello world", would match documents containing "hello" or "world".
             or a dictionary with the following keys:
 
-            - columns: list[str]
+            - columns: List[str]
                 The columns to search,
                 currently only supports a single column in the columns list.
             - query: str
@@ -573,7 +573,7 @@ class LanceDataset(pa.dataset.Dataset):
             e.g. "hello world", would match documents contains "hello" or "world".
             or a dictionary with the following keys:
 
-            - columns: list[str]
+            - columns: List[str]
                 The columns to search,
                 currently only supports a single column in the columns list.
             - query: str
@@ -2495,13 +2495,13 @@ class LanceOperation:
     def _validate_fragments(fragments):
         if not isinstance(fragments, list):
             raise TypeError(
-                f"fragments must be list[FragmentMetadata], got {type(fragments)}"
+                f"fragments must be List[FragmentMetadata], got {type(fragments)}"
             )
         if len(fragments) > 0 and not all(
             isinstance(f, FragmentMetadata) for f in fragments
         ):
             raise TypeError(
-                f"fragments must be list[FragmentMetadata], got {type(fragments[0])}"
+                f"fragments must be List[FragmentMetadata], got {type(fragments[0])}"
             )
 
     class BaseOperation(ABC):
@@ -2524,7 +2524,7 @@ class LanceOperation:
         ----------
         new_schema: pyarrow.Schema
             The schema of the new dataset.
-        fragments: list[FragmentMetadata]
+        fragments: List[FragmentMetadata]
             The fragments that make up the new dataset.
 
         Warning
@@ -2579,7 +2579,7 @@ class LanceOperation:
 
         Attributes
         ----------
-        fragments: list[FragmentMetadata]
+        fragments: List[FragmentMetadata]
             The fragments that contain the new rows.
 
         Warning
@@ -2629,9 +2629,9 @@ class LanceOperation:
 
         Attributes
         ----------
-        updated_fragments: list[FragmentMetadata]
+        updated_fragments: List[FragmentMetadata]
             The fragments that have been updated with new deletion vectors.
-        deleted_fragment_ids: list[int]
+        deleted_fragment_ids: List[int]
             The ids of the fragments that have been deleted entirely. These are
             the fragments where :meth:`LanceFragment.delete()` returned None.
         predicate: str
@@ -2814,9 +2814,9 @@ class LanceOperation:
 
         Attributes
         ----------
-        groups: list[RewriteGroup]
+        groups: List[RewriteGroup]
             Groups of files that have been rewritten.
-        rewritten_indices: list[RewrittenIndex]
+        rewritten_indices: List[RewrittenIndex]
             Indices that have been rewritten.
 
         Warning

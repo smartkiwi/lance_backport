@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright The Lance Authors
 
 import io
-from typing import TYPE_CHECKING, Any, Optional, Union
+from typing import TYPE_CHECKING, Any, List, Optional, Union
 
 import pyarrow as pa
 
@@ -30,7 +30,7 @@ class HuggingFaceConverter:
 
     def to_pytorch(
         self, col: str, array: pa.Array
-    ) -> Optional[Union["torch.Tensor", list["PIL.Image.Image"]]]:
+    ) -> Optional[Union["torch.Tensor", List["PIL.Image.Image"]]]:
         try:
             feature = self.ds_info["info"]["features"][col]
         except KeyError:

@@ -366,7 +366,7 @@ class LanceFragment(pa.dataset.Fragment):
         | BatchUDF
         | ReaderLike
         | Callable[[pa.RecordBatch], pa.RecordBatch],
-        columns: Optional[list[str]] = None,
+        columns: Optional[List[str]] = None,
         batch_size: Optional[int] = None,
         reader_schema: Optional[pa.Schema] = None,
     ) -> Tuple[FragmentMetadata, LanceSchema]:

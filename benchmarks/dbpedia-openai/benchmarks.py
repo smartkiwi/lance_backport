@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 #
 
+from typing import List
 import argparse
 
 import lance
@@ -16,7 +17,7 @@ def run_query(
     refine_factor: int | None = None,
     nprobes: int = 10,
     use_index: bool = True,
-) -> list[list[str]]:
+) -> List[List[str]]:
     results = []
     for query in queries:
         tbl = ds.scanner(

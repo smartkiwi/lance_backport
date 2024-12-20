@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright The Lance Authors
 import math
 import warnings
-from typing import TYPE_CHECKING, Optional, Union
+from typing import TYPE_CHECKING, List, Optional, Union
 
 import numpy as np
 import pyarrow as pa
@@ -380,7 +380,7 @@ class IndicesBuilder:
         ivf: IvfModel,
         pq: PqModel,
         dest_uri: str,
-        fragments: Optional[list[LanceFragment]] = None,
+        fragments: Optional[List[LanceFragment]] = None,
         partition_ds_uri: Optional[str] = None,
     ):
         """
@@ -398,7 +398,7 @@ class IndicesBuilder:
         dest_uri: str
             The URI to save the transformed vectors to.  The URI can be a local file
             path or a cloud storage path.
-        fragments: list[LanceFragment]
+        fragments: List[LanceFragment]
             The list of data fragments to use when computing the transformed vectors.
             This is an optional parameter (the default uses all fragments).
         partition_ds_uri: str
@@ -431,11 +431,11 @@ class IndicesBuilder:
 
     def shuffle_transformed_vectors(
         self,
-        unsorted_filenames: list[str],
+        unsorted_filenames: List[str],
         dir_path: str,
         ivf: IvfModel,
         shuffle_output_root_filename: Optional[str] = "sorted",
-    ) -> list[str]:
+    ) -> List[str]:
         """
         Take the transformed, unsorted vector files as input, and create sorted
         storage files. Sorting is done based on the partition id. This function
@@ -443,7 +443,7 @@ class IndicesBuilder:
 
         Parameters
         ----------
-        unsorted_filenames: list[str]
+        unsorted_filenames: List[str]
             The filenames of the unsorted files.
         dir_path: str
             Directory where all the files are located, and where output files
@@ -456,7 +456,7 @@ class IndicesBuilder:
 
         Returns
         -------
-        list[str]
+        List[str]
             The file paths of the sorted transformed vector files. These will be of the
             form `shuffle_output_root_filename_i.lance`.
         """
@@ -472,7 +472,7 @@ class IndicesBuilder:
 
     def load_shuffled_vectors(
         self,
-        filenames: list[str],
+        filenames: List[str],
         dir_path: str,
         ivf: IvfModel,
         pq: PqModel,
@@ -484,7 +484,7 @@ class IndicesBuilder:
 
         Parameters
         ----------
-        filenames: list[str]
+        filenames: List[str]
             The filenames of the sorted storage files.
         dir_path: str
             Path of the directory where all the files are located.

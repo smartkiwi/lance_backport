@@ -49,7 +49,7 @@ def _efficient_sample(
         The dataset to sample from.
     n : int
         The number of records to sample.
-    columns : list[str]
+    columns : List[str]
         The columns to load.
     batch_size : int
         The batch size to use when loading the data.
@@ -62,7 +62,7 @@ def _efficient_sample(
     -------
     Generator of a RecordBatch.
     """
-    buf: list[pa.RecordBatch] = []
+    buf: List[pa.RecordBatch] = []
     total_records = len(dataset)
     assert total_records > n
     chunk_size = total_records // max_takes
@@ -162,7 +162,7 @@ def _filtered_efficient_sample(
 def maybe_sample(
     dataset: Union[str, Path, lance.LanceDataset],
     n: int,
-    columns: Union[list[str], dict[str, str], str],
+    columns: Union[List[str], dict[str, str], str],
     batch_size: int = 10240,
     max_takes: int = 2048,
     filt: Optional[str] = None,
@@ -175,7 +175,7 @@ def maybe_sample(
         The dataset to sample from.
     n : int
         The number of records to sample.
-    columns : Union[list[str], dict[str, str], str]
+    columns : Union[List[str], dict[str, str], str]
         The columns to load.
     batch_size : int, optional
         The batch size to use when loading the data, by default 10240.
@@ -230,7 +230,7 @@ class PrioritizedItem:
     item: T = field(compare=False)
 
 
-def reservoir_sampling(stream: Iterable[T], k: int) -> list[T]:
+def reservoir_sampling(stream: Iterable[T], k: int) -> List[T]:
     rng = np.random.default_rng()
     heap = []
     for idx, item in enumerate(stream):
