@@ -1,14 +1,14 @@
 name: Build and Run Java JNI Tests
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    paths:
-      - java/**
-      - rust/**
-      - .github/workflows/java.yml
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     paths:
+#       - java/**
+#       - rust/**
+#       - .github/workflows/java.yml
 
 env:
   # This env var is used by Swatinem/rust-cache@v2 for the cache

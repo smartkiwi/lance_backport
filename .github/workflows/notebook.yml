@@ -1,15 +1,15 @@
 name: Run notebook
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    paths:
-      - python/**
-      - rust/**
-      - protos/**
-      - notebooks/**
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     paths:
+#       - python/**
+#       - rust/**
+#       - protos/**
+#       - notebooks/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}

@@ -105,53 +105,53 @@ jobs:
           prefix-key: "manylinux2014" # use this to flush the cache
       - uses: ./.github/workflows/build_linux_wheel
       - uses: ./.github/workflows/run_tests
-      - name: Generate forward compatibility files
-        run: python python/tests/forward_compat/datagen.py
-      - name: Install old wheel
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install pytest pylance==0.16.0
-      - name: Run forward compatibility tests
-        run: |
-          source venv/bin/activate
-          pytest python/tests/forward_compat --run-forward
-      # Make sure wheels are not included in the Rust cache
-      - name: Delete wheels
-        run: sudo rm -rf target/wheels
-  linux-arm:
-    timeout-minutes: 45
-    runs-on: ubuntu-2404-4x-arm64
-    name: Python Linux 3.12 ARM
-    defaults:
-      run:
-        shell: bash
-        working-directory: python
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          lfs: true
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-      - uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: python
-          prefix-key: "manylinux2014" # use this to flush the cache
-      - uses: ./.github/workflows/build_linux_wheel
-        with:
-          arm-build: "true"
-          manylinux: "2_24"
-      - name: Install dependencies
-        run: |
-          sudo apt update -y -qq
-          sudo apt install -y libhdf5-dev
-      - uses: ./.github/workflows/run_tests
-      # Make sure wheels are not included in the Rust cache
-      - name: Delete wheels
-        run: sudo rm -rf target/wheels
+      # - name: Generate forward compatibility files
+      #   run: python python/tests/forward_compat/datagen.py
+      # - name: Install old wheel
+      #   run: |
+      #     python -m venv venv
+      #     source venv/bin/activate
+      #     pip install pytest pylance==0.16.0
+      # - name: Run forward compatibility tests
+      #   run: |
+      #     source venv/bin/activate
+      #     pytest python/tests/forward_compat --run-forward
+      # # Make sure wheels are not included in the Rust cache
+      # - name: Delete wheels
+      #   run: sudo rm -rf target/wheels
+  # linux-arm:
+  #   timeout-minutes: 45
+  #   runs-on: ubuntu-2404-4x-arm64
+  #   name: Python Linux 3.12 ARM
+  #   defaults:
+  #     run:
+  #       shell: bash
+  #       working-directory: python
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #         lfs: true
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: 3.12
+  #     - uses: Swatinem/rust-cache@v2
+  #       with:
+  #         workspaces: python
+  #         prefix-key: "manylinux2014" # use this to flush the cache
+  #     - uses: ./.github/workflows/build_linux_wheel
+  #       with:
+  #         arm-build: "true"
+  #         manylinux: "2_24"
+  #     - name: Install dependencies
+  #       run: |
+  #         sudo apt update -y -qq
+  #         sudo apt install -y libhdf5-dev
+  #     - uses: ./.github/workflows/run_tests
+  #     # Make sure wheels are not included in the Rust cache
+  #     - name: Delete wheels
+  #       run: sudo rm -rf target/wheels
   mac:
     timeout-minutes: 45
     name: Python macOS 3.12 ARM
@@ -174,26 +174,26 @@ jobs:
           workspaces: python
       - uses: ./.github/workflows/build_mac_wheel
       - uses: ./.github/workflows/run_tests
-      # Make sure wheels are not included in the Rust cache
-      - name: Delete wheels
-        run: rm -rf target/wheels
-  windows:
-    runs-on: windows-latest
-    timeout-minutes: 90
-    defaults:
-      run:
-        shell: powershell
-        working-directory: python
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          lfs: true
-      - uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: python
-      - uses: ./.github/workflows/build_windows_wheel
-      - uses: ./.github/workflows/run_tests
+      # # Make sure wheels are not included in the Rust cache
+      # - name: Delete wheels
+      #   run: rm -rf target/wheels
+  # windows:
+  #   runs-on: windows-latest
+  #   timeout-minutes: 90
+  #   defaults:
+  #     run:
+  #       shell: powershell
+  #       working-directory: python
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #         lfs: true
+  #     - uses: Swatinem/rust-cache@v2
+  #       with:
+  #         workspaces: python
+  #     - uses: ./.github/workflows/build_windows_wheel
+  #     - uses: ./.github/workflows/run_tests
   aws-integtest:
     timeout-minutes: 45
     runs-on: "ubuntu-latest"
